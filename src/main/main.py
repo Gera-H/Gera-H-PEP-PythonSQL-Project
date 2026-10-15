@@ -56,8 +56,12 @@ def load_and_clean_users(file_path):
     with open(file_path, "r") as f:
         reader = csv.DictReader(f)
         col = reader.fieldnames
-        print("These are the columns:", col)
-
+        rows = [
+            tuple(row[c] for c in col)
+            for row in reader
+            if all(v is not None and v.strip() != "" for v in row.values())
+        ]
+    print("These are the rows: ", rows)
     print("TODO: load_users")
 
 
