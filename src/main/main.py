@@ -61,7 +61,7 @@ def load_and_clean_users(file_path):
             for row in reader
             if all(v is not None and v.strip() != "" for v in row.values())
         ]
-    print("These are the rows: ", rows)
+        print("These are the rows: ", rows)
     print("TODO: load_users")
 
 
