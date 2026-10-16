@@ -86,7 +86,7 @@ def load_and_clean_call_logs(file_path):
         for row in rows:
             conn.execute(
                 "INSERT INTO callLogs (phoneNumber, startTime, endTime, direction, userId) VALUES (?,?,?,?,?)", row
-            )with open(file_path, "r") as f:
+            )
         
     print("TODO: load_call_logs")
 
