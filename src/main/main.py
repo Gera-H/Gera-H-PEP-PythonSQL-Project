@@ -98,11 +98,13 @@ def write_user_analytics(csv_file_path):
     with open(csv_file_path,"r") as f:
         for row in csv.DictReader(f):
             userId = row["userId"]
-            toatls[userId][0] += float(row["duration"])
+            if userId not in totals:
+                totals[userId] = [0.0,0]
+            totals[userId][0] += float(row["duration"])
             totals[userId][1] += 1
 
     with open("testUserAnalytics.csv", "w") as f:
-        wrtie = csv.writer(f)
+        writer = csv.writer(f)
         for userId, (totalDuration, numCalls) in totals.items():
             avgDuration = totalDuration / numCalls
             write.writerow([userId, avgDuration, numCalls])
