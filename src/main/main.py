@@ -64,10 +64,10 @@ def load_and_clean_users(file_path):
             if all(v is not None and v.strip() != "" for v in values):
                 rows.append(tuple(values))
 
-        for row in rows:
-            conn.execute(
-                "INSERT INTO users (firstName, lastName) VALUES (?,?)", row
-            )
+    for row in rows:
+        conn.execute(
+            "INSERT INTO users (firstName, lastName) VALUES (?,?)", row
+        )
 
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
@@ -83,10 +83,10 @@ def load_and_clean_call_logs(file_path):
             if all(v is not None and v.strip() != "" for v in values):
                 rows.append(tuple(values))
 
-        for row in rows:
-            conn.execute(
-                "INSERT INTO callLogs (phoneNumber, startTime, endTime, direction, userId) VALUES (?,?,?,?,?)", row
-            )
+    for row in rows:
+        conn.execute(
+            "INSERT INTO callLogs (phoneNumber, startTime, endTime, direction, userId) VALUES (?,?,?,?,?)", row
+        )
         
     print("TODO: load_call_logs")
 
