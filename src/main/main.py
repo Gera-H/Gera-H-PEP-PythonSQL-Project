@@ -72,7 +72,22 @@ def load_and_clean_users(file_path):
 
 # This function will load the callLogs.csv file into the callLogs table, discarding any records with incomplete data
 def load_and_clean_call_logs(file_path):
+    with open(file_path, "r") as f:
+        reader = csv.DictReader(f)
+        col = reader.fieldnames
+        rows = []
+        for row in reader:
+            if None in row:
+                continue
+            values = [row[c] for c in col]
+            if all(v is not None and v.strip() != "" for v in values):
+                rows.append(tuple(values))
 
+        for row in rows:
+            conn.execute(
+                "INSERT INTO callLogs (phoneNumber, startTime, endTime, direction, userId) VALUES (?,?,?,?,?)", row
+            )with open(file_path, "r") as f:
+        
     print("TODO: load_call_logs")
 
 
