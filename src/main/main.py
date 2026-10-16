@@ -96,7 +96,7 @@ def write_user_analytics(csv_file_path):
     cursor.execute("SELECT userId, AVG(endTime - startTime), COUNT(*) FROM callLogs GROUP BY userId ORDER BY userId")
     rows = cursor.fetchall()
 
-    with open("testUserAnalytics.csv", "w") as f:
+    with open(csv_file_path, "w") as f:
         writer = csv.writer(f)
         writer.writerow(["userId", "avgDuration", "numCalls"])
         writer.writerows(rows)
