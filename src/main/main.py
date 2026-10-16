@@ -88,13 +88,24 @@ def load_and_clean_call_logs(file_path):
             "INSERT INTO callLogs (phoneNumber, startTime, endTime, direction, userId) VALUES (?,?,?,?,?)", row
         )
         
-    print("TODO: load_call_logs")
-
 
 # This function will write analytics data to testUserAnalytics.csv - average call time, and number of calls per user.
 # You must save records consisting of each userId, avgDuration, and numCalls
 # example: 1,105.0,4 - where 1 is the userId, 105.0 is the avgDuration, and 4 is the numCalls.
 def write_user_analytics(csv_file_path):
+    totals = defaultdict(lambda: [0.0,0])
+
+    with open(csv_file_path,"r") as f:
+        for row in csv.DictReader(f):
+            userId = row["userId"]
+            toatls[userId][0] += float(row["duration"])
+            totals[userId][1] += 1
+
+    with open("testUserAnalytics.csv", "w") as f:
+        wrtie = csv.writer(f)
+        for userId, (totalDuration, numCalls) in totals.items():
+            avgDuration = totalDuration / numCalls
+            write.writerow([userId, avgDuration, numCalls])
 
     print("TODO: write_user_analytics")
 
